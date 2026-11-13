@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 JOYEUX ANNIVERSAIRE THEDY GÉDÉON ! 🎂</title>
+    <!-- Polices Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Bibliothèque Confettis -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #07080f;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.14);
+            --gold: #fbbf24;
+            --pink: #ec4899;
+            --cyan: #06b6d4;
+            --purple: #8b5cf6;
+            --text-main: #ffffff;
+            --text-muted: #cbd5e1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Arrière-plan festif animé */
+        .bg-party {
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(236, 72, 153, 0.18), transparent 45%),
+                radial-gradient(circle at 85% 20%, rgba(6, 182, 212, 0.18), transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(251, 191, 36, 0.18), transparent 50%);
+            z-index: -2;
+            animation: pulseBg 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseBg {
+            0% { transform: scale(1); filter: hue-rotate(0deg); }
+            100% { transform: scale(1.1); filter: hue-rotate(25deg); }
+        }
+
+        /* Particules flottantes (Ballons / Étoiles) */
+        .floating-emojis {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floater {
+            position: absolute;
+            bottom: -60px;
+            font-size: 2rem;
+            opacity: 0.6;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Écran d'introduction (Overlay) */
+        #intro-screen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #131629 0%, #05060a 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s ease;
+        }
+
+        #intro-screen.hidden {
+            opacity: 0;
+            transform: scale(1.1);
+            visibility: hidden;
+        }
+
+        .gift-box-emoji {
+            font-size: 5rem;
+            margin-bottom: 15px;
+            animation: bounceGift 1.2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounceGift {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-18px) scale(1.1); }
+        }
+
+        .badge-date {
+            background: linear-gradient(90deg, rgba(251,191,36,0.2), rgba(236,72,153,0.2));
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+        }
+
+        #intro-screen h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 15px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #fff, var(--gold), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #intro-screen p {
+            color: var(--text-muted);
+            max-width: 520px;
+            margin-bottom: 35px;
+            font-size: 1.05rem;
+        }
+
+        .btn-party {
+            background: linear-gradient(135deg, var(--gold), var(--pink), var(--purple));
+            background-size: 200% 200%;
+            color: #fff;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.05rem;
+            font-weight: 900;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.6);
+            animation: gradientShift 3s ease infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-party:hover {
+            transform: scale(1.07);
+            box-shadow: 0 0 45px rgba(251, 191, 36, 0.9);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(7, 8, 15, 0.75);
+            backdrop-filter: blur(14px);
+            z-index: 100;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, var(--gold), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .sound-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .sound-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 5% 60px;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-text .subtitle {
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 18px;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.08;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(90deg, var(--gold), var(--pink), var(--cyan));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s linear infinite;
+        }
+
+        .typing-box {
+            font-size: 1.15rem;
+            color: var(--gold);
+            font-weight: 700;
+            min-height: 32px;
+            margin-bottom: 15px;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 1.08rem;
+            margin-bottom: 35px;
+            max-width: 550px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border: 2px solid var(--cyan);
+            padding: 16px 28px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--cyan);
+            color: #000;
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+        }
+
+        /* Carte Photo Hero avec halo néon */
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-card {
+            position: relative;
+            width: 100%;
+            max-width: 390px;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+                        linear-gradient(135deg, var(--gold), var(--pink), var(--cyan)) border-box;
+            box-shadow: 0 25px 60px rgba(236, 72, 153, 0.35);
+            transform: rotate(2deg);
+            transition: transform 0.4s ease;
+        }
+
+        .hero-card:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 490px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-card-tag {
+            position: absolute;
+            bottom: 15px; left: 15px; right: 15px;
+            background: rgba(7, 8, 15, 0.88);
+            backdrop-filter: blur(10px);
+            padding: 14px 18px;
+            border-radius: 16px;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Sections générales & Animations Scroll */
+        section {
+            padding: 90px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 4vw, 2.6rem);
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Section Gâteau Interactif */
+        .cake-section {
+            text-align: center;
+            background: linear-gradient(145deg, rgba(251, 191, 36, 0.08), rgba(236, 72, 153, 0.08));
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 32px;
+            padding: 50px 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .cake-container {
+            position: relative;
+            width: 180px;
+            height: 160px;
+            margin: 30px auto 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .cake-container:hover {
+            transform: scale(1.06);
+        }
+
+        .cake-base {
+            position: absolute;
+            bottom: 0; left: 20px;
+            width: 140px; height: 65px;
+            background: linear-gradient(90deg, #ec4899, #db2777);
+            border-radius: 12px 12px 6px 6px;
+            box-shadow: inset 0 -10px 0 rgba(0,0,0,0.2);
+        }
+
+        .cake-top {
+            position: absolute;
+            bottom: 55px; left: 35px;
+            width: 110px; height: 45px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .candle {
+            position: absolute;
+            bottom: 100px; left: 84px;
+            width: 12px; height: 38px;
+            background: repeating-linear-gradient(45deg, #fff, #fff 5px, #06b6d4 5px, #06b6d4 10px);
+            border-radius: 4px;
+        }
+
+        .flame {
+            position: absolute;
+            bottom: 142px; left: 82px;
+            width: 16px; height: 26px;
+            background: radial-gradient(circle, #fff 20%, #fbbf24 60%, #ef4444 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 20px #fbbf24, 0 0 40px #ef4444;
+            animation: flicker 0.2s infinite alternate;
+            transition: opacity 0.4s, transform 0.4s;
+        }
+
+        .flame.out {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        #wish-status {
+            font-weight: 800;
+            color: var(--gold);
+            font-size: 1.15rem;
+            margin-top: 10px;
+        }
+
+        /* Timeline Amitié */
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .time-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 32px;
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .time-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--pink);
+            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.25);
+        }
+
+        .time-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .time-card h3 {
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .time-card p {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+        }
+
+        /* Galerie Photos & Vidéo */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 22px;
+        }
+
+        .media-item {
+            position: relative;
+            border-radius: 22px;
+            overflow: hidden;
+            height: 370px;
+            border: 2px solid var(--card-border);
+            cursor: pointer;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .media-item:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.3);
+        }
+
+        .media-item img, .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .media-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .media-caption {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(7, 8, 15, 0.9), transparent 55%);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 20px;
+            font-weight: 700;
+        }
+
+        /* Lettre de la grande sœur */
+        .letter-box {
+            background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+            border: 2px solid rgba(251, 191, 36, 0.4);
+            border-radius: 30px;
+            padding: clamp(30px, 5vw, 60px);
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+        }
+
+        .letter-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .letter-body {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.28rem;
+            line-height: 1.95;
+            color: #f1f5f9;
+        }
+
+        .letter-body p {
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            margin-top: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            color: var(--gold);
+            font-size: 1.15rem;
+        }
+
+        /* Lightbox pour agrandir les photos */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 88vh;
+            border-radius: 16px;
+            border: 2px solid var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 45px 20px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 850px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-text p { margin: 0 auto 30px; }
+            .hero-buttons { justify-content: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-party"></div>
+    <div class="floating-emojis" id="emoji-container"></div>
+
+    <!-- Écran de déverrouillage -->
+    <div id="intro-screen">
+        <div class="gift-box-emoji" onclick="startExperience()">🎁</div>
+        <div class="badge-date">Édition Spéciale • 10 Novembre</div>
+        <h1>Un colis VIP depuis Brazzaville 🇨🇬 ➔ 🇷🇺</h1>
+        <p>Même avec un numéro retrouvé à 23h pile, une promesse de grande sœur est sacrée. Monte le son et ouvre ta surprise !</p>
+        <button class="btn-party" onclick="startExperience()">Lancer la fête ! 🎉✨</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">THEDY.242 🎂</div>
+        <div class="nav-controls">
+            <div class="nav-links">
+                <a href="#gateau">Le Gâteau</a>
+                <a href="#histoire">Notre Histoire</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#message">Le Mot</a>
+            </div>
+            <button class="sound-btn" id="music-toggle" onclick="toggleMusic()">🎵 Musique : ON</button>
+        </div>
+    </nav>
+
+    <!-- Section Principale -->
+    <header>
+        <div class="hero-container">
+            <div class="hero-text">
+                <span class="subtitle">🔥 C'est ta journée Frérot !</span>
+                <h1>AZANGOSSOUE <br><span>Thedy Gédéon</span></h1>
+                <div class="typing-box" id="typing-text"></div>
+                <p>De nos bancs de la Seconde jusqu'à ton aventure en Russie : célébrons le boss du 10 novembre ! Que cette nouvelle année t'apporte succès, force et réussite !</p>
+                <div class="hero-buttons">
+                    <button class="btn-party" onclick="fireworksShow()">Feux d'artifice 🎆</button>
+                    <a href="#gateau" style="text-decoration:none;"><button class="btn-secondary">Souffler ma bougie 🎂</button></a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <div class="hero-card">
+                    <img src="WhatsApp Image 2026-11-13 at 15.56.34.jpeg" alt="Thedy Gédéon">
+                    <div class="hero-card-tag">
+                        <div>
+                            <strong>Le Boss du 10 Nov</strong><br>
+                            <small style="color: var(--gold);">En direct de Russie 🇷🇺</small>
+                        </div>
+                        <span style="font-size: 1.5rem;">🥂🎂</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Gâteau Interactif -->
+    <section id="gateau" class="reveal">
+        <div class="cake-section">
+            <h2 style="font-size: 2rem; font-weight: 900;">Fais un vœu et souffle la bougie ! 🕯️</h2>
+            <p style="color: var(--text-muted);">Clique sur le gâteau pour éteindre la flamme</p>
+            
+            <div class="cake-container" onclick="blowCandle()">
+                <div class="flame" id="candle-flame"></div>
+                <div class="candle"></div>
+                <div class="cake-top"></div>
+                <div class="cake-base"></div>
+            </div>
+
+            <div id="wish-status">✨ La flamme brûle encore... Clique dessus !</div>
+        </div>
+    </section>
+
+    <!-- Section Histoire -->
+    <section id="histoire" class="reveal">
+        <div class="section-title">
+            <h2>De la Seconde à la Russie</h2>
+            <p>Quelques chapitres d'une amitié qui traverse les frontières</p>
+        </div>
+        <div class="timeline">
+            <div class="time-card">
+                <span class="time-icon">🏫</span>
+                <h3>La Seconde</h3>
+                <p>Là où tout a commencé. Les fous rires, la complicité immédiate et cette énergie qui a fait de toi bien plus qu'un simple pote de classe.</p>
+            </div>
+            <div class="time-card">
+                <span class="time-icon">👑</span>
+                <h3>Juillet vs Novembre</h3>
+                <p>La hiérarchie est claire : je suis née en juillet, tu es né en novembre. Officiellement mon petit frère, pour toujours et à jamais !</p>
+            </div>
+            <div class="time-card">
+                <span class="time-icon">✈️</span>
+                <h3>Cap sur la Russie</h3>
+                <p>Tu as pris ton envol pour conquérir de nouveaux horizons. Voir ton évolution et ton charisme là-bas fait super plaisir.</p>
+            </div>
+           
+        </div>
+    </section>
+
+    <!-- Galerie -->
+    <section id="galerie" class="reveal">
+        <div class="section-title">
+            <h2>Life in Russia 📸</h2>
+            <p>Clique sur une photo pour l'agrandir en plein écran</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="media-item" onclick="openLightbox('WhatsApp Image 2026-11-13 at 15.56.37.jpeg')">
+                <img src="WhatsApp Image 2026-11-13 at 15.56.37.jpeg" alt="Style miroir">
+                <div class="media-caption">
+                    <span>Classy & Sharp 🕴🏾</span>
+                    <span>🔍</span>
+                </div>
+            </div>
+            <div class="media-item" onclick="openLightbox('WhatsApp Image 2026-11-13 at 15.56.36.jpeg')">
+                <img src="WhatsApp Image 2026-11-13 at 15.56.36.jpeg" alt="Détente restaurant">
+                <div class="media-caption">
+                    <span>Pause fraîcheur 🍹</span>
+                    <span>🔍</span>
+                </div>
+            </div>
+            <div class="media-item" onclick="openLightbox('WhatsApp Image 2026-11-13 at 15.56.14.jpeg')">
+                <img src="WhatsApp Image 2026-11-13 at 15.56.14.jpeg" alt="Balade en ville">
+                <div class="media-caption">
+                    <span>Les rues de Russie 🇷🇺</span>
+                    <span>🔍</span>
+                </div>
+            </div>
+            <div class="media-item" onclick="openLightbox('WhatsApp Image 2026-11-13 at 15.56.12.jpeg')">
+                <img src="WhatsApp Image 2026-11-13 at 15.56.12.jpeg" alt="Salle de sport">
+                <div class="media-caption">
+                    <span>Mode Discipline 💪🏾</span>
+                    <span>🔍</span>
+                </div>
+            </div>
+            <div class="media-item">
+                <video src="WhatsApp Video 2026-11-13 at 15.56.31.mp4" controls loop></video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Message personnel -->
+    <section id="message" class="reveal">
+        <div class="letter-box">
+            <div class="letter-header">
+                <span style="font-size: 2.5rem;">💌</span>
+                <div>
+                    <h2 style="font-size: 1.7rem; color: var(--gold);">Le mot de ta grande sœur</h2>
+                    <small style="color: var(--cyan);">Écrit et codé spécialement pour toi</small>
+                </div>
+            </div>
+            <div class="letter-body">
+                <p>Mon cher petit frère Thedy,</p>
+                <p>Il a fallu que je remue ciel et terre (et nos potes) à 23h le 10 novembre pour remettre la main sur ton numéro, mais il était hors de question que je laisse passer ton anniversaire sans marquer le coup.</p>
+                <p>Depuis notre époque en seconde, tu as toujours été cette personne vraie avec qui le courant passe naturellement. Même à des milliers de kilomètres, entre Brazzaville et la Russie, rien n'a changé. Je suis super fière de te voir avancer, t'adapter et tracer ta route avec autant de détermination.</p>
+                <p>Je te souhaite une année exceptionnelle : la santé de fer, la réussite dans tes études et tes projets, et tout le bonheur que tu mérites. Profite à fond de ta nouvelle année d'âge !</p>
+            </div>
+            <div class="signature">
+                — Ta grande sœur de juillet, Murielle ✨
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="" alt="Agrandissement">
+    </div>
+
+    <footer>
+        <p>Développé avec ❤️, du code et beaucoup de bonne humeur par Murielle • Spécialement pour AZANGOSSOUE Thedy Gédéon</p>
+    </footer>
+
+    <script>
+        // 1. Génération des emojis festifs flottants
+        const emojis = ['🎈', '🎉', '🎂', '✨', '🥂', '🎁', '🔥'];
+        const emojiContainer = document.getElementById('emoji-container');
+        for (let i = 0; i < 18; i++) {
+            const span = document.createElement('span');
+            span.className = 'floater';
+            span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.animationDuration = (6 + Math.random() * 8) + 's';
+            span.style.animationDelay = (Math.random() * 5) + 's';
+            emojiContainer.appendChild(span);
+        }
+
+        // 2. Effet machine à écrire dynamique
+        const phrases = [
+            "Joyeux Anniversaire mon petit frère ! 🎂",
+            "De Brazzaville jusqu'en Russie 🇨🇬 ➔ 🇷🇺",
+            "Que la réussite t'accompagne partout 🚀",
+            "Team Juillet domine Team Novembre 😎"
+        ];
+        let pIndex = 0, cIndex = 0, isDeleting = false;
+        function typeLoop() {
+            const target = document.getElementById('typing-text');
+            const current = phrases[pIndex];
+            target.innerText = isDeleting ? current.substring(0, cIndex--) : current.substring(0, cIndex++);
+            
+            if (!isDeleting && cIndex === current.length + 1) {
+                isDeleting = true;
+                setTimeout(typeLoop, 1800);
+            } else if (isDeleting && cIndex === 0) {
+                isDeleting = false;
+                pIndex = (pIndex + 1) % phrases.length;
+                setTimeout(typeLoop, 400);
+            } else {
+                setTimeout(typeLoop, isDeleting ? 40 : 75);
+            }
+        }
+        typeLoop();
+
+        // 3. Synthétiseur Web Audio pour jouer "Joyeux Anniversaire" sans fichier externe
+        let audioCtx = null;
+        let isPlayingMusic = false;
+        let musicInterval = null;
+
+        const notes = [
+            { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.3 }, { f: 293.66, d: 0.6 }, { f: 261.63, d: 0.6 }, { f: 349.23, d: 0.6 }, { f: 329.63, d: 1.0 },
+            { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.3 }, { f: 293.66, d: 0.6 }, { f: 261.63, d: 0.6 }, { f: 392.00, d: 0.6 }, { f: 349.23, d: 1.0 },
+            { f: 261.63, d: 0.3 }, { f: 261.63, d: 0.3 }, { f: 523.25, d: 0.6 }, { f: 440.00, d: 0.6 }, { f: 349.23, d: 0.6 }, { f: 329.63, d: 0.6 }, { f: 293.66, d: 1.0 },
+            { f: 466.16, d: 0.3 }, { f: 466.16, d: 0.3 }, { f: 440.00, d: 0.6 }, { f: 349.23, d: 0.6 }, { f: 392.00, d: 0.6 }, { f: 349.23, d: 1.2 }
+        ];
+
+        function playBirthdayMelody() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            let time = audioCtx.currentTime + 0.1;
+            notes.forEach(n => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(n.f, time);
+                gain.gain.setValueAtTime(0.15, time);
+                gain.gain.exponentialRampToValueAtTime(0.001, time + n.d);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(time);
+                osc.stop(time + n.d);
+                time += n.d + 0.08;
+            });
+        }
+
+        function toggleMusic() {
+            const btn = document.getElementById('music-toggle');
+            if (!isPlayingMusic) {
+                isPlayingMusic = true;
+                btn.innerText = "🎵 Musique : ON";
+                playBirthdayMelody();
+                musicInterval = setInterval(playBirthdayMelody, 15500);
+            } else {
+                isPlayingMusic = false;
+                btn.innerText = "🔇 Musique : OFF";
+                clearInterval(musicInterval);
+                if (audioCtx) audioCtx.suspend();
+            }
+        }
+
+        // 4. Feux d'artifice spectaculaires
+        function fireworksShow() {
+            const duration = 4 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+
+                const particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, {
+                    particleCount,
+                    origin: { x: Math.random() * 0.4 + 0.1, y: Math.random() - 0.2 },
+                    colors: ['#fbbf24', '#ec4899', '#06b6d4', '#ffffff']
+                }));
+                confetti(Object.assign({}, defaults, {
+                    particleCount,
+                    origin: { x: Math.random() * 0.4 + 0.5, y: Math.random() - 0.2 },
+                    colors: ['#fbbf24', '#ec4899', '#06b6d4', '#ffffff']
+                }));
+            }, 250);
+        }
+
+        // 5. Démarrage de l'expérience
+        function startExperience() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            toggleMusic();
+            setTimeout(fireworksShow, 300);
+        }
+
+        // 6. Souffler la bougie du gâteau
+        let candleBlown = false;
+        function blowCandle() {
+            const flame = document.getElementById('candle-flame');
+            const status = document.getElementById('wish-status');
+            if (!candleBlown) {
+                flame.classList.add('out');
+                candleBlown = true;
+                status.innerText = "🎉 Vœu enregistré ! Que tous tes rêves en Russie se réalisent ! (Clique encore pour rallumer)";
+                fireworksShow();
+            } else {
+                flame.classList.remove('out');
+                candleBlown = false;
+                status.innerText = "🕯️ Bougie rallumée ! Fais un deuxième vœu !";
+            }
+        }
+
+        // 7. Lightbox galerie
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        // 8. Animation au scroll
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
